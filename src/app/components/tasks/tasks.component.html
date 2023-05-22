@@ -1,0 +1,31 @@
+
+<div class="container">
+  <div class="alert alert-dismissible alert-info" style="margin-top: 2%;">
+    <strong>Create new task  &nbsp;  &nbsp; </strong> <button routerLink="task/create" type="button" class="btn btn-primary">Create</button>
+  </div>
+
+  <div *ngIf="newtasks && newtasks.length > 0; else noTasksMessage">
+  <div class="row" >
+      <div class="col-md-4 col-xl-4" *ngFor="let task of newtasks">
+          <div class="card bg-c-blue order-card">
+              <div class="card-block">
+                  <h6 class="m-b-20">{{task.title}}</h6>
+                  <h2 class="text-right"><span>{{task.discription}}</span></h2>
+                  <p class="m-b-0"><span class="f-right">Assign To: {{task.teamMember.name}}</span></p>
+                  <br>
+                  <button  [routerLink]="['task','edit',task.id]" type="button" class="btn btn-primary">Edit</button>
+              </div>
+          </div>
+      </div>
+</div>
+</div>
+</div>
+
+<ng-template #noTasksMessage>
+  <div class="alert alert-dismissible alert-warning">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <h4 class="alert-heading">Warning!</h4>
+    <p class="mb-0">No tasks available.</p>
+  </div>
+</ng-template>
+

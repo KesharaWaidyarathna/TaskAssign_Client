@@ -1,0 +1,22 @@
+
+<div class="container my-5">
+    <h1 class="mb-3">Create new member</h1>
+    <div class="col-6">
+        <form #form="ngForm" (ngSubmit)="createTeamMember()">
+            <div class="form-group">
+                <label class="col-form-label mt-4" for="name">Name</label>
+                <input  type="text" class="form-control" placeholder="Name" id="name" [class.is-invalid]="newTeamMember.name== ''" 
+                 name="name" [(ngModel)]="newTeamMember.name">
+                 <a *ngIf="newTeamMember.name==''" class="invalid-feedback">Title is mandatory</a>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label mt-4" for="designation">Designation</label>
+                <input  type="text" class="form-control" placeholder="Designation" id="designation" 
+                name="designation" [(ngModel)]="newTeamMember.designation">
+            </div>
+              <br>
+            <button *ngIf="newTeamMember.name!=''" type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+    

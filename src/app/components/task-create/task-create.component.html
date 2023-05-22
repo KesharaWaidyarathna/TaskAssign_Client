@@ -1,0 +1,48 @@
+
+
+
+ <div class="container my-5">
+    <div *ngIf="teamMembers && teamMembers.length > 0; else noTasksMessage">
+    <h1 class="mb-3">Create new task</h1>
+    <div class="col-6">
+        <form #form="ngForm" (ngSubmit)="createTask()">
+            <div class="form-group">
+                <label class="col-form-label mt-4" for="title">Title</label>
+                <input  type="text" class="form-control" placeholder="Title" id="title" required [class.is-invalid]="newTask.title== ''"
+                name="title" [(ngModel)]="newTask.title">
+                <a *ngIf="newTask.title==''" class="invalid-feedback">Title is mandatory</a>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label mt-4" for="discription">Discription</label>
+                <input  type="text" class="form-control" placeholder="discription" id="discription" 
+                name="discription" [(ngModel)]="newTask.discription">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label mt-4" for="startDate">Start Date</label>
+                <input  type="date" class="form-control" placeholder="Start Date" id="startDate" [min]="currentDate" required [class.is-invalid]="newTask.startDate== ''"
+                name="startDate" [(ngModel)]="newTask.startDate">
+                <a *ngIf="newTask.startDate==''" class="invalid-feedback">StartDate is mandatory</a>
+            </div>
+            <div class="form-group">
+                <label for="teamMmber" class="form-label mt-4">Team Member</label>
+                <select  class="form-select" id="id" [class.is-invalid]="newTask.teamMember.id==0" name="id" [(ngModel)]="newTask.teamMember.id">
+                    <option *ngFor="let teamMember of teamMembers" [value]="teamMember.id">{{ teamMember.name }}</option>
+                </select>
+                <a *ngIf="newTask.teamMember.id==0" class="invalid-feedback">Please assign a member</a>
+              </div>
+              <br>
+            <button *ngIf="newTask.startDate!=''  && newTask.title!=''&& newTask.teamMember.id>0" type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+    
+</div>
+
+
+<ng-template #noTasksMessage>
+    <div class="alert alert-dismissible alert-warning">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <h4 class="alert-heading">Warning!</h4>
+      <p class="mb-0">Please crerate team members first.</p>
+    </div>
+  </ng-template>
